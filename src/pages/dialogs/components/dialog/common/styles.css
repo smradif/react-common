@@ -1,0 +1,45 @@
+.dialog-background {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+}
+
+.dialog-content {
+    top: 100px;
+    position: absolute;
+    max-width: 600px;
+    width: 70%;
+    pointer-events: auto;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 0.3rem;
+    outline: 0;
+}
+
+.close-icon {
+    height: 26px;
+    width: 26px;
+    opacity: 0.5;
+}
+
+.close-icon:hover {
+    opacity: 1;
+    cursor: pointer;
+}
+
+.dialog-body {
+    position: relative;
+    flex: 1 1 auto;
+    padding: 1rem;
+}
+
+.dialog-actions > Button {
+    margin-left: 5px;
+    min-width: 70px;
+}

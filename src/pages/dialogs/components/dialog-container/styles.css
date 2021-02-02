@@ -1,0 +1,15 @@
+.buttons-container {
+    margin-top: 50px;
+}
+
+.buttons-container > Button {
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+
+.custom-dialog-child {
+    background: red;
+    color: white;
+    padding: 5px;
+    margin: 5px 0;
+}
