@@ -12,7 +12,7 @@ Different implementations for state management, however The store is used to con
 ## Error Boundary
 Error handling implementations
 ## Bootstrap integration
-Styles using react-ootstrap
+Styles using react-bootstrap
 ## Available Scripts
 
 In the project directory, you can run:
