@@ -1,33 +1,32 @@
 import React from 'react';
-import WizardContext from '../wizard/wizard-provider';
+import { useWizardContext } from '../wizard/wizard-provider';
 import { StepActions } from './step-actions';
 import { StepTitle } from './steps-title';
 import { StepProps } from './types';
 
-export const StepBase: React.FC<StepProps> = (props: StepProps) => {
-    const { order, title } = props;
+const StepBase: React.FC<StepProps> = (props: StepProps) => {
+    const { order, title, onCompletion, isValid } = props;
     const ref = React.useRef<HTMLTextAreaElement>(null);
-    const [stepData, setStepData] = React.useState<string>();
-    const context = React.useContext(WizardContext);
-    const isCurrent: boolean = order === context.step;
+    const context = useWizardContext();
+    const { currentStep, wizardDataMap } = context?.state!;
+    const isCurrent: boolean = order === currentStep;
 
     React.useEffect(() => {
         ref?.current?.focus();
-    }, [context.step]);
-    
-    const handleNext = () => {
-        context.handleNext(stepData);
-    }
+    }, [context?.state.currentStep]);
 
     const handleTextChange = (e: any) => {
-        setStepData(e.target.value);
+        const text = e.target.value;
+        if (isValid(text)) {
+            onCompletion(order, text);
+        }
     }
 
-    const data = context.data.get(context.step);
+    const stepData = wizardDataMap.get(currentStep);
 
     return isCurrent ? (<>
         <StepTitle title={title!}></StepTitle>
-        <textarea ref={ref} rows={10} style={{ width: '100%' }} onChange={handleTextChange} value={data}></textarea>
-        <StepActions {...context} handleNext={handleNext} ></StepActions>
+        <textarea ref={ref} rows={10} style={{ width: '100%' }} onChange={handleTextChange} value={stepData}></textarea>
     </>) : <></>;
 }
+export default StepBase;

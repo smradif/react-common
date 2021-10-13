@@ -1,53 +1,37 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { WizardProps } from "./types";
-import WizardContext from "./wizard-provider";
+import { useWizardContext } from "./wizard-provider";
 import { WizardSummary } from "./wizard-summary";
 import "./styles.css";
 import { WizardTitle } from "./wizard-title";
+import { StepActions } from '../steps/step-actions';
 
 export const Wizard: React.FC<WizardProps> = (props: WizardProps) => {
   const { title, noOfSteps } = props;
-  const [step, setStep] = React.useState(1);
-  const [wizardData, setWizardData] = useState<Map<number, any>>(
-    new Map<number, any>()
-  );
-  const [isCompleted, setIsCompleted] = useState(false);
+  const context = useWizardContext();
+  const { state, dispatch } = context!;
+  const { isCompleted, wizardDataMap, currentStep, error } = state;
 
-  const save = (data: any) => {
-    wizardData.set(step, data);
-    setWizardData(wizardData);
-  };
+  useEffect(() => {
+    context?.dispatch({ type: 'steps', payload: noOfSteps })
+  }, [])
+  
 
-  const handleNext = (data: any) => {
-    save(data);
-    if (step === noOfSteps) {
-      setIsCompleted(true);
-    } else {
-      setStep((s) => s + 1);
-    }
-  };
+  const handleNext = () => {
+    dispatch({ type: 'next' });
+  }
 
   const handlePrevious = () => {
-    setStep((s) => s - 1);
+    dispatch({ type: 'previous' });
   };
 
   const handleStartAgain = () => {
-    setStep(1);
-    setWizardData(new Map());
-    setIsCompleted(false);
+    dispatch({ type: 'reset' });
   };
-
-  const value = {
-    step,
-    noOfSteps,
-    handleNext,
-    handlePrevious,
-    data: wizardData
-  };
-
+  
   return isCompleted ? (
     <>
-      <WizardSummary data={wizardData}></WizardSummary>
+      <WizardSummary data={wizardDataMap}></WizardSummary>
       <div>
         <button onClick={handleStartAgain}>Start again</button>
       </div>
@@ -55,9 +39,10 @@ export const Wizard: React.FC<WizardProps> = (props: WizardProps) => {
   ) : (
     <div className="container">
       <WizardTitle title={title}></WizardTitle>
-      <WizardContext.Provider value={value}>
+      <div>
         {props.children}
-      </WizardContext.Provider>
+      </div>
+      <StepActions step={currentStep} noOfSteps={noOfSteps} error={error} handleNext={handleNext} handlePrevious={handlePrevious} />
     </div>
   );
 };

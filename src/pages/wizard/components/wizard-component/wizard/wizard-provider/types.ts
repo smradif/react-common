@@ -1,7 +1,21 @@
-export interface WizardContextProps {
-    step: number;
-    noOfSteps: number;
-    data?: any;
-    handleNext: (data: any) => void;
-    handlePrevious: () => void;
+export type WizardContextProps = {
+    state: WizardState;
+    dispatch: WizardDispatch;
 }
+
+export type WizardState = {
+    currentStep: number;
+    noOfSteps: number;
+    isCompleted: boolean;
+    error: string;
+    wizardDataMap: Map<number, any>;
+}
+
+export type WizardAction =
+    { type: 'update', payload: any } |
+    { type: 'next' } |
+    { type: 'previous' } |
+    { type: 'reset' } |
+    { type: 'steps', payload: number };
+
+export type WizardDispatch = (action: WizardAction) => void;

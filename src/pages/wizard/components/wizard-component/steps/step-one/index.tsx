@@ -1,7 +1,13 @@
 import React from 'react';
-import { StepBase } from '../step.base';
+import StepBase from '../step.base';
 import { StepProps } from "../types";
 
-export const StepOne: React.FC<StepProps> = (props: StepProps) => {
-    return <StepBase {...props} title="Question 1"></StepBase>
+const StepOne: React.FC<StepProps> = (props: StepProps) => {
+    const isValid = (text: string) => {
+        return true;
+    }
+
+    return <StepBase {...props} title="Question 1" isValid={isValid}></StepBase>
 }
+
+export default StepOne;

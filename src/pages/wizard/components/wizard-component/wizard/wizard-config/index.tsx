@@ -1,13 +1,13 @@
 import React from "react";
 import { Steps } from "../../steps";
-import { StepOne } from "../../steps/step-one";
-import { StepThree } from "../../steps/step-three";
-import { StepTwo } from "../../steps/step-two";
+import StepOne from "../../steps/step-one";
+import StepThree from "../../steps/step-three";
+import StepTwo from "../../steps/step-two";
 import { WizardConfigItem, QUESTIONS_WIZARD, RANDOM_QUESTIONS_WIZARD } from "./types";
 
 
-export const WizardConfig: { [key: string]: WizardConfigItem } = { 
-    [QUESTIONS_WIZARD]: { 
+export const WizardConfig: { [key: string]: WizardConfigItem } = {
+    [QUESTIONS_WIZARD]: {
         title: 'Wizard',
         component: Steps,
         key: 'StepsKey',
@@ -15,10 +15,10 @@ export const WizardConfig: { [key: string]: WizardConfigItem } = {
             { component: StepOne, key: 'Step1Key', requireOrder: true },
             { component: StepTwo, key: 'Step2Key', requireOrder: true },
             { component: StepThree, key: 'Step3Key', requireOrder: true }
-        ] 
+        ]
     },
 
-    [RANDOM_QUESTIONS_WIZARD]: { 
+    [RANDOM_QUESTIONS_WIZARD]: {
         title: 'Random Wizard',
         component: Steps,
         key: 'StepsKey',
@@ -26,7 +26,7 @@ export const WizardConfig: { [key: string]: WizardConfigItem } = {
             { component: StepTwo, key: 'Step2Key', requireOrder: true },
             { component: StepOne, key: 'Step1Key', requireOrder: true },
             { component: StepThree, key: 'Step3Key', requireOrder: true }
-        ] 
+        ]
     }
 };
 
