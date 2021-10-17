@@ -7,6 +7,7 @@ export type WizardState = {
     currentStep: number;
     noOfSteps: number;
     isCompleted: boolean;
+    isSubmitted: boolean;
     error: string;
     wizardDataMap: Map<number, any>;
 }

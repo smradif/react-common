@@ -15,7 +15,7 @@ export const Wizard: React.FC<WizardProps> = (props: WizardProps) => {
   useEffect(() => {
     context?.dispatch({ type: 'steps', payload: noOfSteps })
   }, [])
-  
+
 
   const handleNext = () => {
     dispatch({ type: 'next' });
@@ -28,7 +28,7 @@ export const Wizard: React.FC<WizardProps> = (props: WizardProps) => {
   const handleStartAgain = () => {
     dispatch({ type: 'reset' });
   };
-  
+
   return isCompleted ? (
     <>
       <WizardSummary data={wizardDataMap}></WizardSummary>

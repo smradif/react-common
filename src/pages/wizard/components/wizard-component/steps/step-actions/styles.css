@@ -1,7 +1,12 @@
 .buttons-container {
-    text-align: right;
+    display: flex;
+    justify-content: right;
 }
 
 .buttons-container > button {
     margin-left: 5px;
+}
+
+.error-container {
+    color: red;
 }
