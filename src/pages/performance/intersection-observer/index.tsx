@@ -3,9 +3,9 @@ import 'intersection-observer';
 import { PerformanceItemProps } from '../types';
 import './styles.css';
 
-export const IntersectionObserver = () => {
+export const IntersectionObserver = ({ items = 1000 }) => {
     const intersectionItems = [];
-    for (let i = 0; i < 1000; i++) {
+    for (let i = 0; i < items; i++) {
         intersectionItems.push(i);
     }
 

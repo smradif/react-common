@@ -13,7 +13,7 @@ const PerformancePage = (props: PerformancePageProps) => {
     const getComponent = () => {
         switch (type) {
             case 'intersection':
-                return <IntersectionObserver />;
+                return <IntersectionObserver items={1000} />;
             case 'virtualized':
                 return <Virtualized />;
             case 'infinite':
